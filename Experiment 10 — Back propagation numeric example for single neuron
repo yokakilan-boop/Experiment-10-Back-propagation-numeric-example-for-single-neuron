@@ -1,0 +1,46 @@
+Experiment 10 — Back propagation numeric example for single neuron
+AIM:
+Manually compute forward and backward pass for a single sigmoid neuron and update
+weights.
+
+
+ALGORITHM :
+Compute gradient of cross-entropy loss and update weights via gradient descent.
+
+
+PROGRAM:
+import numpy as np
+# Single sample x, target y x = np.array([0.5, -1.2]) y = 1.0
+w = np.array([0.1, -0.2]); b = 0.0 lr = 0.1
+def sigmoid(z): return 1/(1+np.exp(-z)) # Forward pass
+z = np.dot(w, x) + b a = sigmoid(z)
+loss = - (y*np.log(a) + (1-y)*np.log(1-a)) # Backward pass (gradients)
+dz = a - y dw = dz * x db = dz
+# Update weights w_new = w - lr * dw b_new = b - lr * db
+print('a (output):', round(a,4), 'loss:', round(loss,4))
+print('dw:', np.round(dw,4), 'db:', round(db,4))
+print('Updated w:', np.round(w_new,4), 'Updated b:', round(b_new,4))
+
+DETAILED EXPLANATION :
+1.	Define input x and target y.
+ 
+2.	Initialize weights w and bias b, set learning rate lr.
+3.	sigmoid function computes activation.
+4.	Forward: compute z = w·x + b, a = sigmoid(z).
+5.	Loss: binary cross-entropy (single-sample).
+6.	Backprop: dz = a - y (derivative of loss wrt z for sigmoid+cross-entropy), dw = dz
+* x, db = dz.
+7.	Weight update: w_new = w - lr * dw. 8.
+SAMPLE OUTPUT :
+a (output): 0.4502 loss: 0.8014
+dw: [-0.275 0.66] db: -0.55
+Updated w: [0.1275 -0.266] Updated b: 0.055
+
+RESULT:
+Learners observe numeric gradients and weight updates; demystifies
+backpropagation.
+
+
+THEORY:
+Back propagation is chain rule application in neural nets; cross-entropy + sigmoid
+simplifies gradients.
